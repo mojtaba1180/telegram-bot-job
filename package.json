@@ -1,0 +1,16 @@
+{
+  "name": "kar-bot",
+  "version": "1.0.0",
+  "description": "telegram bot for kar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "telegraf": "^4.8.6"
+  }
+}
