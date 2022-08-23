@@ -4,7 +4,7 @@ import Messages from "./utils/messages.js";
 import fs from "fs";
 
 // bot configs:
-const botToken = "5613115963:AAF9vVVnzxh0OoVSLMzmzQKpzGhWcYbWDZI";
+const botToken = "5577282725:AAElt04_o_wpcibpF_vQ57RJfrALg28-0cA";
 const bot = new Telegraf(process.env.BOT_TOKEN || botToken);
 
 // bot start command:
@@ -15,18 +15,54 @@ bot.start(
 
 // bot job-seeker callback query:
 bot
-  .hears("کارجو", async (ctx) => {
-    await ctx.replyWithMediaGroup([
+  .hears("کارفرما", async (ctx) => {
+    await ctx.reply(`
+    به دنبال کدام یک از نوع کار به عنوان کارفرما میباشید
+    `, Markup.keyboard(["اصناف", "شرکتی"]))
+  });
+
+
+
+  bot.hears("شرکتی", async (ctx) => {
+    await ctx.reply(' برای ارسال مدارک خود در این سایت میتوانید مدارک خود را ارسال کنید ', 
       {
-        media: { source: fs.readFileSync("./src/images/card.jpg") },
-        caption: Messages.jobSeeker.stepOne,
-        type: "photo",
-      },
-    ]);
-  })
-  .on("message", async (ctx) => {
-    const files = ctx.update.message.photo;
-    console.log(files);
+        reply_markup: {
+            inline_keyboard: [
+                /* Also, we can have URL buttons. */
+                [ { text: " استخدام شرکتی ", url: "https://formaloo.com/job-sherkati" } ]
+            ]
+        }}
+      )
+  });
+
+
+  
+  bot.hears("اصناف", async (ctx) => {
+    await ctx.reply(' برای ارسال مدارک خود در این سایت میتوانید مدارک خود را ارسال کنید ', 
+      {
+        reply_markup: {
+            inline_keyboard: [
+                /* Also, we can have URL buttons. */
+                [ { text: " استخدام اصناف ", url: "https://formaloo.com/job-asnaf" } ]
+            ]
+        }}
+      )
+  });
+
+
+
+  
+  
+  bot.hears("کارجو", async (ctx) => {
+    await ctx.reply(' برای ارسال مدارک خود در این سایت میتوانید مدارک خود را ارسال کنید ', 
+      {
+        reply_markup: {
+            inline_keyboard: [
+                /* Also, we can have URL buttons. */
+                [ { text: " استخدام کارجو ", url: "https://formaloo.com/job-karjo" } ]
+            ]
+        }}
+      )
   });
 
 // launch bot and show bot token:
